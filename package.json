@@ -1,0 +1,37 @@
+{
+  "name": "grunt-lingxi-base64",
+  "description": "a grunt task which takes html files,js files or css files,and replaces small image path with base64 string,and rename the image file with the image file content md5",
+  "version": "0.1.0",
+  "homepage": "https://github.com/adtxgc/grunt-lingxi-base64",
+  "author": {
+    "name": "adtxgc",
+    "email": "adtxgc@hotmail.com",
+    "url": "www.nextjs.cn"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adtxgc/grunt-lingxi-base64.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adtxgc/grunt-lingxi-base64/issues"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/adtxgc/grunt-lingxi-base64/blob/master/LICENSE-MIT"
+  }],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
