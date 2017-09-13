@@ -1,0 +1,16 @@
+.item1{
+  float: left;
+  height: 400px;
+  width: 80px;
+}
+.item2{
+  float: left;
+  height: 400px;
+  width: 500px;
+}
+.left1{
+  background: url('../images/test1.png') no-repeat;
+}
+.right1{
+  background: url('../images/test2.png') no-repeat;
+}
