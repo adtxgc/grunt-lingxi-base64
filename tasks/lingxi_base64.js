@@ -1,6 +1,6 @@
 /*
  * grunt-lingxi-base64
- * https://github.com/xwliu/plugin
+ * https://github.com/adtxgc/grunt-lingxi-base64
  *
  * Copyright (c) 2017 adtxgc
  * Licensed under the MIT license.
@@ -52,14 +52,7 @@ module.exports = function(grunt) {
               imgPaths.forEach((imgPath) => {
                 let tempPath = imgPath.replace(/"|'/g, ""); //得到图片路径字符串
 
-                let tempDirPath = dirPath;
-                if (dirPath.indexOf("component") > -1) {
-                  let tempAry = dirPath.split('/');
-                  tempAry.pop();
-                  tempAry.pop();
-                  tempDirPath = tempAry.join('/');
-                }
-                tempPath = path.join(tempDirPath, tempPath);
+                tempPath = path.join(dirPath, tempPath);
                 if (grunt.file.exists(tempPath)) {
                   if (getFileBytes(tempPath) <= options.limit) {
                     let base64 = convertImgUrl2Base64(tempPath);
@@ -95,14 +88,7 @@ module.exports = function(grunt) {
                 tempPath = tempPath.replace(/url\(/, "");
                 tempPath = tempPath.replace(/\)/, ""); //得到图片路径字符串
 
-                let tempDirPath = dirPath;
-                if (dirPath.indexOf("component") > -1) {
-                  let tempAry = dirPath.split('/');
-                  tempAry.pop();
-                  tempAry.pop();
-                  tempDirPath = tempAry.join('/');
-                }
-                tempPath = path.join(tempDirPath, tempPath);
+                tempPath = path.join(dirPath, tempPath);
                 if (grunt.file.exists(tempPath)) {
                   if (getFileBytes(tempPath) <= options.limit) {
                     let base64 = convertImgUrl2Base64(tempPath);
