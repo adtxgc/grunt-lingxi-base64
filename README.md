@@ -23,19 +23,15 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.limit
+Type: `Number`
+Default value: 3072
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+设置转成base64字符串图片文件的最大大小。
 
 ### Usage Examples
+
+由于没有发布到npm上，所以使用时可以当成本地插件引入。
 
 ```js
 grunt.initConfig({
