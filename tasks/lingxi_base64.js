@@ -26,8 +26,6 @@ module.exports = function(grunt) {
 
       //图片文件原始目录和用md5签名重命名之后的目录映射关系列表
       let imgPathMap = {};
-      //转成base64字符串的图片文件路径列表
-      let imgBase64PathList = {};
 
       // Merge task-specific and/or target-specific options with these defaults.
       let options = this.options({
@@ -60,10 +58,6 @@ module.exports = function(grunt) {
 
                     fileStr = fileStr.replace(pat, base64);
 
-                    //缓存转成base64字符串的图片路径
-                    if (!imgBase64PathList[tempPath]) {
-                      imgBase64PathList[tempPath] = 1;
-                    }
                   } else {
                     //md5签名重命名
                     let newImgPath = renameImgByMd5(tempPath);
@@ -100,10 +94,6 @@ module.exports = function(grunt) {
 
                     fileStr = fileStr.replace(pat, base64);
 
-                    //缓存转成base64字符串的图片路径
-                    if (!imgBase64PathList[tempPath]) {
-                      imgBase64PathList[tempPath] = 1;
-                    }
                   } else {
                     //md5签名重命名
                     let newImgPath = renameImgByMd5(tempPath);
@@ -137,12 +127,6 @@ module.exports = function(grunt) {
         fs.renameSync(oriImgPath, imgPathMap[oriImgPath]);
       }
       imgPathMap = null;
-
-      //删除已转成base64字符串的图片文件
-      for (let imgPath in imgBase64PathList) {
-        fs.unlinkSync(imgPath);
-      }
-      imgBase64PathList = null;
 
       grunt.log.write("files has converted");
     });
