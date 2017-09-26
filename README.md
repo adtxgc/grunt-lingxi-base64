@@ -12,7 +12,8 @@ In your project's Gruntfile, add a section named `lingxi_base64` to the data obj
 grunt.initConfig({
   lingxi_base64: {
     options: {
-      limit: 5120 //限制要转成base64字符串的图片大小，单位是字节，默认是3KB
+      limit: 5120, //限制要转成base64字符串的图片大小，单位是字节，默认是3KB
+      imgAllowMd5: true //其他图片是否需要md5重命名，默认不需要
     },
     files: {
       src: []   //需要处理那些文件里面的图片引用
@@ -29,6 +30,12 @@ Default value: 3072
 
 设置转成base64字符串图片文件的最大大小。
 
+#### options.imgAllowMd5
+Type:`Boolean`
+Default value: false
+
+设置没有转成base64的图片是否需要md5重命名
+
 ### Usage Examples
 
 由于没有发布到npm上，所以使用时可以当成本地插件引入。
@@ -37,7 +44,8 @@ Default value: 3072
 grunt.initConfig({
   lingxi_base64: {
     options: {
-      limit: 5120
+      limit: 5120,
+      imgAllowMd5: true
     },
     files: {
       src: ['test/Target/*html', 'test/Target/css/*.css']
@@ -45,4 +53,3 @@ grunt.initConfig({
   }
 });
 ```
-

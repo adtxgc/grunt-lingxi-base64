@@ -25,6 +25,12 @@ module.exports = function(grunt) {
         src: '**',
         dest: 'test/Target/css/'
       },
+      js: {
+        expand: true,
+        cwd: 'test/Test/js/',
+        src: '**',
+        dest: 'test/Target/js/'
+      },
       html: {
         expand: true,
         cwd: 'test/Test/',
@@ -36,10 +42,13 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     lingxi_base64: {
       options: {
-        limit: 5120
+        limit: 5120,
+        imgAllowMd5: true
       },
       files: {
-        src: ['test/Target/*html', 'test/Target/css/*.css']
+        src: ['test/Target/*html', 'test/Target/css/*.css',
+          'test/Target/js/*.js'
+        ]
       }
     }
 

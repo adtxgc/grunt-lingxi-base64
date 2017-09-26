@@ -1,6 +1,6 @@
 /*
  * grunt-lingxi-base64
- * https://github.com/adtxgc/grunt-lingxi-base64
+ * https://github.com/xwliu/plugin
  *
  * Copyright (c) 2017 adtxgc
  * Licensed under the MIT license.
@@ -26,10 +26,13 @@ module.exports = function(grunt) {
 
       //图片文件原始目录和用md5签名重命名之后的目录映射关系列表
       let imgPathMap = {};
+      //转成base64字符串的图片文件路径列表
+      let imgBase64PathList = {};
 
       // Merge task-specific and/or target-specific options with these defaults.
       let options = this.options({
-        limit: 3072
+        limit: 3072,
+        imgAllowMd5: false
       });
 
       //遍历配置
@@ -50,7 +53,8 @@ module.exports = function(grunt) {
               imgPaths.forEach((imgPath) => {
                 let tempPath = imgPath.replace(/"|'/g, ""); //得到图片路径字符串
 
-                tempPath = path.join(dirPath, tempPath);
+                let tempDirPath = dirPath;
+                tempPath = path.join(tempDirPath, tempPath);
                 if (grunt.file.exists(tempPath)) {
                   if (getFileBytes(tempPath) <= options.limit) {
                     let base64 = convertImgUrl2Base64(tempPath);
@@ -58,7 +62,12 @@ module.exports = function(grunt) {
 
                     fileStr = fileStr.replace(pat, base64);
 
-                  } else {
+                    //缓存转成base64字符串的图片路径
+                    if (!imgBase64PathList[tempPath]) {
+                      imgBase64PathList[tempPath] = 1;
+                    }
+
+                  } else if (options.imgAllowMd5) {
                     //md5签名重命名
                     let newImgPath = renameImgByMd5(tempPath);
                     let pat = new RegExp('/' + path.basename(
@@ -82,7 +91,8 @@ module.exports = function(grunt) {
                 tempPath = tempPath.replace(/url\(/, "");
                 tempPath = tempPath.replace(/\)/, ""); //得到图片路径字符串
 
-                tempPath = path.join(dirPath, tempPath);
+                let tempDirPath = dirPath;
+                tempPath = path.join(tempDirPath, tempPath);
                 if (grunt.file.exists(tempPath)) {
                   if (getFileBytes(tempPath) <= options.limit) {
                     let base64 = convertImgUrl2Base64(tempPath);
@@ -94,7 +104,12 @@ module.exports = function(grunt) {
 
                     fileStr = fileStr.replace(pat, base64);
 
-                  } else {
+                    //缓存转成base64字符串的图片路径
+                    if (!imgBase64PathList[tempPath]) {
+                      imgBase64PathList[tempPath] = 1;
+                    }
+
+                  } else if (options.imgAllowMd5) {
                     //md5签名重命名
                     let newImgPath = renameImgByMd5(tempPath);
                     let pat = new RegExp('/' + path.basename(
@@ -127,6 +142,12 @@ module.exports = function(grunt) {
         fs.renameSync(oriImgPath, imgPathMap[oriImgPath]);
       }
       imgPathMap = null;
+
+      //删除已转成base64字符串的图片文件
+      for (let imgPath in imgBase64PathList) {
+        fs.unlinkSync(imgPath);
+      }
+      imgBase64PathList = null;
 
       grunt.log.write("files has converted");
     });
