@@ -17,9 +17,9 @@ module.exports = function(grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
   const htmlImgPattern =
-    /("|')\.{0,2}(\/?(\w+|\w-\w))*((\.png|\.jpeg|\.jpg)\s*("|'))/gi;
+    /("|')(\.{1,2}\/)?images\/(\w+|\w-\w)+\.(png|jpeg|jpg)\s*("|')/gi;
   const cssImgPattern =
-    /url\(("|')?\.{0,2}(\/?(\w+|\w-\w))*((\.png|\.jpeg|\.jpg)("|')?\))/gi;
+    /url\(("|')(\.{1,2}\/)?images\/(\w+|\w-\w)+\.(png|jpeg|jpg)\s*("|')\)/gi;
   grunt.registerMultiTask('lingxi_base64',
     'A grunt task which takes html files,js files or css files,and replaces the image path with base64 string',
     function() {
